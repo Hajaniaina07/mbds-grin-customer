@@ -5,12 +5,15 @@
 package fr.hajmar.tpcustomerapplication.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,6 +46,8 @@ public class MicroMarket implements Serializable {
     private Double areaLength;
     @Column(name = "AREA_WIDTH")
     private Double areaWidth;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zip")
+    private Collection<Customer> customerCollection;
 
     public MicroMarket() {
     }
@@ -81,6 +86,14 @@ public class MicroMarket implements Serializable {
 
     public void setAreaWidth(Double areaWidth) {
         this.areaWidth = areaWidth;
+    }
+
+    public Collection<Customer> getCustomerCollection() {
+        return customerCollection;
+    }
+
+    public void setCustomerCollection(Collection<Customer> customerCollection) {
+        this.customerCollection = customerCollection;
     }
 
     @Override
